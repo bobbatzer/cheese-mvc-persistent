@@ -21,28 +21,32 @@ public class CategoryController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        model.addAttribute("categories", categoryDao.findAll());
+
         model.addAttribute("title", "Categories");
+        model.addAttribute("categories", categoryDao.findAll());
+
         return "category/index";
     }
 
-    @RequestMapping(value = "add", method= RequestMethod.GET)
+    @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
-        model.addAttribute(new Category()); // shorthand to pass category key
-        model.addAttribute("title", "Add category");
+
+        model.addAttribute("title", "Add Category");
+        model.addAttribute(new Category());
+
         return "category/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Category category,
-                      Errors errors) {
+    public String add(Model model, @ModelAttribute @Valid Category category, Errors errors) {
 
-        // validate as always
         if (errors.hasErrors()) {
             return "category/add";
-        } // implicit else
+        }
 
-        categoryDao.save(category); // save the Category object
-        return "redirect:"; // goes back to root path in the controller aka /category
+        categoryDao.save(category);
+
+        return "redirect:";
     }
+
 }

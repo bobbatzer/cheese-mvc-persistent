@@ -8,14 +8,11 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<ul th:each="category : ${categories}">
+    <a th:href="@{/cheese/category(id=${category.id})}"><li th:text="${category.name}"></li></a>
+</ul>
+
 <a href="/category/add">Add Category</a>
 
-<!-- nothing to show -->
-<p th:unless="${categories} and ${categories.size()}">no categories :(</p>
-
-<!-- list all categories -->
-<ul th:each="category : ${categories}">
-    <li th:text="${category.name}"></li>
-</ul>
 </body>
 </html>

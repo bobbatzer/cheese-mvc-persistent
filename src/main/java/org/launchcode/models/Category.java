@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity // make it persistent
+@Entity
 public class Category {
 
     @Id
@@ -18,13 +18,19 @@ public class Category {
     private String name;
 
     @OneToMany
-    @JoinColumn(name= "category_id") // category_id in cheese table
-    private List<Cheese> cheeses = new ArrayList<>(); // list of all cheeses in a given category
+    @JoinColumn(name = "category_id")
+    private List<Cheese> cheeses = new ArrayList<>();
 
-    public Category() {} // default constructor
+    public Category() {
+
+    }
 
     public Category(String name) {
         this.name = name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -35,11 +41,5 @@ public class Category {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public List<Cheese> getCheeses() {
-        return cheeses;
-    }
+    public List<Cheese> getCheeses() { return cheeses; }
 }
